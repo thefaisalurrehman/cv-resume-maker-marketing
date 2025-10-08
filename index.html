@@ -1,146 +1,384 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Create professional resumes in minutes with CV Maker: PDF Resume Builder. Choose from modern templates and export your resume to PDF instantly." />
+    <meta name="description" content="Create professional resumes in minutes with CV Maker: PDF Resume Builder. Choose from modern templates, customize, and export to PDF instantly. Private, fast, and easy." />
     <title>CV Maker: PDF Resume Builder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-blue: #007bff;
+            --gradient-start: #007bff;
+            --gradient-end: #00a2ff;
+            --light-bg: #f8faff;
+            --dark-text: #333;
+            --light-text: #f0f2f5;
+            --shadow-color: rgba(0,0,0,0.08);
+            --hover-blue: #0056b3;
+            --light-blue-hover: #e7f1ff;
+        }
+
         body {
             margin: 0;
-            font-family: "Poppins", sans-serif;
-            background-color: #f8faff;
-            color: #333;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
         }
 
-        header {
-            background: linear-gradient(135deg, #007bff, #00a2ff);
-            color: white;
-            text-align: center;
-            padding: 80px 20px;
-        }
-
-        header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            margin-bottom: 25px;
-        }
-
-        .btn-download {
-            display: inline-block;
-            background-color: white;
-            color: #007bff;
-            padding: 14px 28px;
-            border-radius: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .btn-download:hover {
-            background-color: #e7f1ff;
-        }
-
-        .section {
-            max-width: 1000px;
-            margin: 60px auto;
-            text-align: center;
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
             padding: 0 20px;
         }
 
+        header {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            text-align: center;
+            padding: 100px 20px 80px;
+            position: relative;
+            overflow: hidden; /* For background patterns/effects */
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(45deg);
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        header h1 {
+            font-size: 3.2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        header p {
+            font-size: 1.3rem;
+            margin-bottom: 35px;
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .app-icon {
+            width: 90px;
+            height: 90px;
+            border-radius: 20px; /* Slightly more rounded */
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-download {
+            display: inline-flex; /* Use flexbox for icon alignment */
+            align-items: center;
+            gap: 10px;
+            background-color: white;
+            color: var(--primary-blue);
+            padding: 16px 32px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-download:hover {
+            background-color: var(--light-blue-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .btn-download img {
+            height: 20px; /* Adjust size of App Store icon */
+            width: auto;
+        }
+
+        .section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .section:nth-of-type(odd) {
+            background-color: #ffffff;
+        }
+
         .section h2 {
-            color: #007bff;
-            font-size: 2rem;
-            margin-bottom: 20px;
+            color: var(--primary-blue);
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .section p.sub-heading {
+            font-size: 1.15rem;
+            color: #555;
+            max-width: 800px;
+            margin: -20px auto 50px auto;
         }
 
         .features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
         }
 
         .feature-box {
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            padding: 25px;
-            width: 260px;
-            transition: transform 0.3s ease;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px var(--shadow-color);
+            padding: 30px;
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .feature-box:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
         }
 
         .feature-box img {
-            width: 60px;
+            width: 55px;
+            height: 55px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+        }
+
+        .feature-box h3 {
+            color: #0056b3;
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .feature-box p {
+            color: #555;
+            font-size: 1.05rem;
+        }
+
+        .how-it-works-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            margin-top: 50px;
+            text-align: left;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-direction: row;
+        }
+
+        .step:nth-child(even) {
+            flex-direction: row-reverse; /* Alternate layout */
+        }
+
+        .step .text-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .step .text-content h3 {
+            font-size: 2rem;
+            color: var(--primary-blue);
             margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .step .text-content p {
+            font-size: 1.1rem;
+            color: #444;
+            line-height: 1.7;
+        }
+
+        .step .screenshot-mockup {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .step .screenshot-mockup img {
+            max-width: 80%; /* Adjust size as needed */
+            height: auto;
+            border-radius: 25px; /* Rounded corners for phone bezel effect */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
         footer {
-            background-color: #007bff;
-            color: white;
+            background-color: #2c3e50; /* Darker footer */
+            color: var(--light-text);
             text-align: center;
-            padding: 30px 10px;
+            padding: 40px 10px;
+            font-size: 0.95rem;
         }
 
         footer a {
-            color: #fff;
+            color: #a2d4ff; /* Lighter blue for links */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #e0f2ff;
             text-decoration: underline;
         }
 
+        /* Responsive Adjustments */
+        @media (max-width: 900px) {
+            .step {
+                flex-direction: column; /* Stack on smaller screens */
+                gap: 20px;
+            }
+            .step:nth-child(even) {
+                flex-direction: column; /* Keep stacked */
+            }
+            .step .screenshot-mockup img {
+                max-width: 90%;
+            }
+        }
+
         @media (max-width: 768px) {
-            header h1 { font-size: 2rem; }
-            .feature-box { width: 90%; }
+            header h1 { font-size: 2.2rem; }
+            header p { font-size: 1rem; }
+            .section h2 { font-size: 2rem; }
+            .feature-box { width: 100%; padding: 20px; }
+            .section { padding: 50px 0; }
+        }
+
+        @media (max-width: 480px) {
+            header h1 { font-size: 1.8rem; }
+            .btn-download {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            .app-icon {
+                width: 70px;
+                height: 70px;
+            }
         }
     </style>
 </head>
 <body>
     <header>
+        <img src="https://raw.githubusercontent.com/thefaisalurrehman/cv-resume-maker-marketing/refs/heads/main/assets/app%20icon.png" alt="App Icon" class="app-icon"/>
         <h1>CV Maker: PDF Resume Builder</h1>
-        <p>Create professional resumes in minutes</p>
-        <a href="#" class="btn-download">Download on the App Store</a>
+        <p>Craft your perfect professional resume in minutes. Choose stunning templates, customize with ease, and export to PDF instantly!</p>
+        <a href="https://apps.apple.com/app/id6753736007" class="btn-download">
+            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store"/>
+            <span>Download Now</span>
+        </a>
     </header>
 
     <section class="section">
-        <h2>Why Choose CV Maker?</h2>
-        <div class="features">
-            <div class="feature-box">
-                <img src="https://cdn-icons-png.flaticon.com/512/1157/1157109.png" alt="Modern Templates Icon">
-                <h3>Modern Templates</h3>
-                <p>Choose from clean and professional templates designed to impress employers.</p>
-            </div>
-            <div class="feature-box">
-                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF Export Icon">
-                <h3>PDF Export</h3>
-                <p>Instantly export your resume to PDF and share it anywhere, anytime.</p>
-            </div>
-            <div class="feature-box">
-                <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="User-Friendly Icon">
-                <h3>Simple & Fast</h3>
-                <p>Create your resume in just a few steps — no design skills needed.</p>
+        <div class="container">
+            <h2>Why CV Maker is Your Best Choice</h2>
+            <p class="sub-heading">We combine powerful features with an intuitive design to help you stand out in today's competitive job market.</p>
+            <div class="features">
+                <div class="feature-box">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1157/1157109.png" alt="Modern Templates Icon">
+                    <h3>Modern & Diverse Templates</h3>
+                    <p>Select from a rich collection of professionally designed templates tailored for various industries and styles.</p>
+                </div>
+                <div class="feature-box">
+                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF Export Icon">
+                    <h3>Instant PDF Export</h3>
+                    <p>Generate high-quality, print-ready PDF resumes with a single tap. Share effortlessly via email, cloud, or messaging.</p>
+                </div>
+                <div class="feature-box">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="User-Friendly Icon">
+                    <h3>Incredibly Easy to Use</h3>
+                    <p>Our intuitive interface guides you through resume creation. No design skills needed—just fill in your details!</p>
+                </div>
+                <div class="feature-box">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="User-Friendly Icon"> <h3>Complete Data Privacy</h3>
+                    <p>Your privacy is paramount. All your resume data is stored locally on your device and is never uploaded to any server.</p>
+                </div>
+                <div class="feature-box">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="User-Friendly Icon"> <h3>A4 & US Letter Support</h3>
+                    <p>Seamlessly switch between international A4 and US Letter page sizes to ensure perfect formatting for any region.</p>
+                </div>
+                <div class="feature-box">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="User-Friendly Icon"> <h3>Multi-Lingual Capabilities</h3>
+                    <p>Create your resume in any language. Our app supports diverse content, making it perfect for global job seekers.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="section">
-        <h2>How It Works</h2>
-        <p>1. Select a modern resume template.<br>
-           2. Fill in your personal and professional details.<br>
-           3. Preview and export your resume to PDF instantly.<br>
-           4. Share your resume directly with employers.</p>
+    <section class="section" style="background-color: white;">
+        <div class="container">
+            <h2>How It Works</h2>
+            <p class="sub-heading">Building your professional resume is a simple, 4-step process.</p>
+            <div class="how-it-works-grid">
+                <div class="step">
+                    <div class="text-content">
+                        <h3>1. Tap Create Cv Button</h3>
+                        <p>Easily input your profile information like Name, designation and contact informatio.</p>
+                    </div>
+                    <div class="screenshot-mockup">
+                        <img src="https://raw.githubusercontent.com/thefaisalurrehman/cv-resume-maker-marketing/refs/heads/main/assets/Profile.png" alt="Screenshot of template selection"/>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="text-content">
+                        <h3>2. Fill In Your Details</h3>
+                        <p>Easily input your education, work experience, skills, contact information, and more. Our guided process makes data entry a breeze.</p>
+                    </div>
+                    <div class="screenshot-mockup">
+                        <img src="https://raw.githubusercontent.com/thefaisalurrehman/cv-resume-maker-marketing/refs/heads/main/assets/details.png" alt="Screenshot of data entry form"/>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="text-content">
+                        <h3>3. Preview & Refine</h3>
+                        <p>See real-time updates as you build. Adjust and refine your resume until every detail is perfect, ensuring a flawless final look.</p>
+                    </div>
+                    <div class="screenshot-mockup">
+                        <img src="https://raw.githubusercontent.com/thefaisalurrehman/cv-resume-maker-marketing/refs/heads/main/assets/details.png" alt="Screenshot of resume preview"/>
+                    </div>
+                </div>
+                 <div class="step">
+                    <div class="text-content">
+                        <h3>4. Export to PDF & Share</h3>
+                        <p>Generate a professional PDF with a single tap. Your resume is ready to be shared with potential employers instantly, anywhere, anytime.</p>
+                    </div>
+                    <div class="screenshot-mockup">
+                        <img src="https://raw.githubusercontent.com/thefaisalurrehman/cv-resume-maker-marketing/refs/heads/main/assets/details.png" alt="Screenshot of PDF export/share"/>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <footer>
-        <p>© 2025 CV Maker: PDF Resume Builder</p>
-        <p>Contact: <a href="mailto:faisaldeveloper493@icloud.com">faisaldeveloper493@icloud.com</a></p>
+        <div class="container">
+            <p>&copy; 2023 CV Maker: PDF Resume Builder. All rights reserved.</p>
+            <p>
+                <a href="./privacy.md">Privacy Policy</a> |
+                <a href="mailto:faisaldeveloper493@icloud.com">Contact Support</a>
+            </p>
+        </div>
     </footer>
 </body>
 </html>
